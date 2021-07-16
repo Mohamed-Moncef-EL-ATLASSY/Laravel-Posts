@@ -55,7 +55,6 @@
                                 </form>
                                 @endif
                                 <span>{{ $post->likes->count()}} {{ Str::plural('Like', $post->likes->count() ) }}</span>
-                                {{-- <span>{{ $post->unlikes->count()}}</span> --}}
                             </div>
                         </div>
                     @endforeach

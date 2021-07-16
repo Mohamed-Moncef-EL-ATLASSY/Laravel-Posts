@@ -33,6 +33,6 @@ Route::post('/posts' , [PostController::class, 'store']);
 Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
 
 //Unlike
-Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
+Route::get('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
 
 
