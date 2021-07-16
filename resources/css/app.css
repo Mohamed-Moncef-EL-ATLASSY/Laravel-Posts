@@ -1,0 +1,9 @@
+:root {
+    --color-primary: #202020;
+    --color-secondary: #FFD100;
+    /* ... */
+  }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
