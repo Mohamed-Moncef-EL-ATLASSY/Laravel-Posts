@@ -30,5 +30,9 @@ class Post extends Model
     public function unlikes() {
         return $this->hasMany(Unlike::class);
     }
+
+    // public function ownedByUser(User $user){
+    //     return $user->id === $this->user_id;
+    // }
 }
 

@@ -39,13 +39,27 @@
                     @foreach ($posts as $post)
                         <div class="mb-4">
                             <div class="text-gray-900 font-bold text-2xl">{{ $post->user->name }} <a class="text-gray-600 font-normal text-xs leading-none"> posted {{$post->created_at->diffForHumans()}}</a></div>
-                            <p class="text-xl">{{$post->body}}
-                            </p>
+                            <p class="text-xl">{{$post->body}} </p>
+
+                            @can('delete', $post)
+                            <div>
+                                <form action="{{ route('posts.destroy' , $post ) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 text-white my-3 font-bold py-2 px-4 rounded inline-flex items-center">
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
+                            </div>
+                            @endcan
+
+
                             <div class="flex items-center text-sm">
+                                @auth
                                 @if(!$post->likedBy(auth()->user()))
                                 <form action="{{ route('posts.likes', $post->id) }}" method="post" class="mr-1 mr-3">
                                     @csrf
-                                    <button type="submit" class="text-green-500 font-bold">Like</button>
+                                    <button type="submit" class="text-green-700 font-bold">Like</button>
                                 </form>
                                 @else
                                 <form action="{{ route('posts.likes', $post->id) }}" method="delete" class="mr-1">
@@ -55,6 +69,8 @@
                                 </form>
                                 @endif
                                 <span>{{ $post->likes->count()}} {{ Str::plural('Like', $post->likes->count() ) }}</span>
+
+                                @endauth
                             </div>
                         </div>
                     @endforeach

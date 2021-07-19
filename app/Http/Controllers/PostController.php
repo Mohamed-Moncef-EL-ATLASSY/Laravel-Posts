@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 
 class PostController extends Controller
 {
@@ -13,13 +14,13 @@ class PostController extends Controller
     }
 
     public function index() {
-        $posts = Post::paginate(6);
+        $posts = Post::latest()->with(['user', 'likes'])->paginate(5);
 
         return view('homepage', [
             'posts' => $posts
         ]);
-
     }
+
 
     public function store(Request $request) {
         $this->validate($request , [
@@ -27,6 +28,15 @@ class PostController extends Controller
         ]);
 
         $request->user()->posts()->create($request->only('body'));
+
+        return back();
+    }
+
+    public function destroy(Post $post){
+
+        $this->authorize('delete', $post); //Throws an exception
+
+        $post->delete();
 
         return back();
     }

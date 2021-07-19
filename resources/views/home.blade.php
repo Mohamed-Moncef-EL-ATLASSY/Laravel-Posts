@@ -14,12 +14,8 @@
         <ul class="flex items-center">
 
             <li>
-                <a href="/" class="p-6"><b> Home</b> </a>
+                <a href="/" class="p-6"><b> My posts</b> </a>
             </li>
-
-
-
-
 
             @auth
             <li>
@@ -32,14 +28,12 @@
             @endauth
         </ul>
 
-
         <ul class="flex items-center">
             {{-- If user authenticated --}}
             @auth
             <li>
                 <a href="" class="p-6"><b>Welcome, {{ auth()->user()->name }}</b></a>
             </li>
-
             <li>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
@@ -48,12 +42,6 @@
                     </button>
                 </form>
             </li>
-
-            {{-- <li>
-                <a href="{{ route('logout') }}" class="p-6"> Log Out </a>
-            </li> --}}
-
-
             @endauth
 
             {{-- If user is guest --}}
